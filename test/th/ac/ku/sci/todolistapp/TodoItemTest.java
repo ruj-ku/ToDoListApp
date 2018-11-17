@@ -1,9 +1,15 @@
 package th.ac.ku.sci.todolistapp;
 
+import org.junit.jupiter.api.Test;
+import th.ac.ku.sci.todolistapp.model.TodoItem;
+
 import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+
+/** JUnit 5 test */
 
 class TodoItemTest {
 
@@ -22,25 +28,55 @@ class TodoItemTest {
         item.setEnd(end);
         assertEquals(item.getEnd(),end);
         item.setStart(null);
-        assertEquals(item.getStart(),null);
+        assertEquals(null,item.getStart());
         item.setEnd(null);
-        assertEquals(item.getEnd(),null);
+        assertEquals(null,item.getEnd());
         item.setEnd(start);
         item.setStart(end);
-        assertEquals(item.getStart(),start);
-        assertEquals(item.getEnd(),end);
+        assertEquals(start, item.getStart());
+        assertEquals(end, item.getEnd());
         item.setStart(null);
         item.setEnd(null);
         item.setStart(end);
         item.setEnd(start);
-        assertEquals(item.getStart(),start);
-        assertEquals(item.getEnd(),end);
+        assertEquals(start, item.getStart());
+        assertEquals(end,item.getEnd());
         item.setEnd(mid);
         item.setStart(end);
-        assertEquals(item.getStart(),mid);
-        assertEquals(item.getEnd(),end);
+        assertEquals(mid,item.getStart());
+        assertEquals(end,item.getEnd());
         item.setEnd(start);
-        assertEquals(item.getStart(),start);
-        assertEquals(item.getEnd(),mid);
+        assertEquals(start,item.getStart());
+        assertEquals(mid,item.getEnd());
+    }
+
+    @Test
+    void equal(){
+        TodoItem t1 = new TodoItem();
+        TodoItem t2 = new TodoItem();
+
+        assertFalse(t1.equals(null));
+        assertTrue(t1.equals(t2));
+
+        t1.title = "a";
+        assertFalse(t1.equals(t2));
+        t2.title = "a";
+        assertTrue(t1.equals(t2));
+
+        t1.detail = "da";
+        assertFalse(t1.equals(t2));
+        t1.title = "b";
+        assertFalse(t1.equals(t2));
+        t2.title = "b";
+        assertFalse(t1.equals(t2));
+
+        t2.detail = "da";
+        assertTrue(t1.equals(t2));
+        t1.title = "a";
+        assertFalse(t1.equals(t2));
+        t2.title = "a";
+        assertTrue(t1.equals(t2));
+
+        // More to test for all combinations
     }
 }

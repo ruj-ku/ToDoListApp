@@ -1,10 +1,11 @@
-package th.ac.ku.sci.todolistapp;
+package th.ac.ku.sci.todolistapp.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TodoItem {
-    private String title;
-    private String detail;
+public class TodoItem implements Serializable {
+    public String title = "";
+    public String detail = "";
     private Date created;
     private Date start;
     private Date end;
@@ -18,23 +19,7 @@ public class TodoItem {
         this.detail = detail;
         this.created = created;
         this.start = start;
-        this.end = end;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
+        setEnd(end);
     }
 
     public Date getCreated() {
@@ -68,6 +53,28 @@ public class TodoItem {
             this.start = end;
         }else{
             this.end = end;
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null){
+            return false;
+        }
+        TodoItem t = (TodoItem)obj;
+        return this.title.equals(t.title)
+                && this.detail.equals(t.detail)
+                && equalDate(this.created,t.created)
+                && equalDate(this.created,t.created)
+                && equalDate(this.start,t.start)
+                && equalDate(this.end,t.end);
+    }
+
+    private boolean equalDate(Date d1, Date d2){
+        if(d1 == null && d2 == null){
+            return true;
+        }else{
+            return d1 != null && d2 != null && d1.equals(d2);
         }
     }
 }
