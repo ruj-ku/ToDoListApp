@@ -6,12 +6,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import th.ac.ku.sci.todolistapp.model.DataModel;
 import th.ac.ku.sci.todolistapp.model.TodoItem;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 public class MainPage {
+
+    File saveFile = new File("todo.sav");
 
     DataModel dataModel = DataModel.getInstance();
 
@@ -78,7 +83,36 @@ public class MainPage {
 
     @FXML
     public void saveButtonActionHandler(ActionEvent e){
-
+        if(saveFile.exists()) {
+            try {
+                this.dataModel.save(saveFile);
+            } catch (IOException e1) {
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        e1.getMessage(),
+                        ButtonType.CLOSE);
+                alert.show();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    saveFile.getAbsolutePath() + " does not exists.",
+                    ButtonType.CLOSE);
+            alert.showAndWait();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose new save file");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("TodoList save file", "*.sav"));
+            this.saveFile = fileChooser.showSaveDialog(this.tableView.getScene().getWindow());
+            if(this.saveFile != null){
+                try {
+                    this.dataModel.save(saveFile);
+                } catch (IOException e1) {
+                    alert = new Alert(Alert.AlertType.ERROR,
+                            e1.getMessage(),
+                            ButtonType.CLOSE);
+                    alert.show();
+                }
+            }
+        }
     }
 
     void createRandomData(){
@@ -87,8 +121,6 @@ public class MainPage {
         for (int i = 0; i < 10; i++) {
             l.add(TodoItem.createRandomTodoItem());
         }
-
-
     }
 }
 

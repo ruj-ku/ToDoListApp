@@ -4,25 +4,30 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
 public class TodoItem implements Serializable {
-    private final SimpleStringProperty title = new SimpleStringProperty("");
-    private final SimpleStringProperty detail = new SimpleStringProperty("");
+    private SimpleStringProperty title ;
+    private SimpleStringProperty detail;
 
-    private final SimpleObjectProperty<Date> created = new SimpleObjectProperty<Date>(null);
-    private final SimpleObjectProperty<Date> start = new SimpleObjectProperty<Date>(null);
-    private final SimpleObjectProperty<Date> end = new SimpleObjectProperty<Date>(null);
-    private final SimpleBooleanProperty isDone = new SimpleBooleanProperty(false);
+    private SimpleObjectProperty<Date> created;
+    private SimpleObjectProperty<Date> start;
+    private SimpleObjectProperty<Date> end ;
+    private SimpleBooleanProperty isDone ;
 
     public TodoItem(){
+        initializeProperty();
     }
 
     public TodoItem(String title, String detail,
                     Date created, Date start, Date end) {
+        this();
         this.title.set(title);
         this.detail.set(detail);
         this.created.set(created);
@@ -47,7 +52,7 @@ public class TodoItem implements Serializable {
 
     public void setDetail(String detail) {
         if(detail == null){
-            detail = null;
+            detail = "";
         }
         this.detail.set(detail);
     }
@@ -128,5 +133,34 @@ public class TodoItem implements Serializable {
         Date d3 = c.getTime();
         return new TodoItem("Title"+ random.nextInt(),
                 "Detail"+random.nextInt(), d1,d2,d3);
+    }
+
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        s.writeObject(this.title.get());
+        s.writeObject(this.detail.get());
+        s.writeObject(this.created.get());
+        s.writeObject(this.start.get());
+        s.writeObject(this.end.get());
+        s.writeBoolean(this.isDone.get());
+    }
+
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        initializeProperty();
+        this.title.set((String)s.readObject());
+        this.detail.set((String)s.readObject());
+        this.created.set((Date)s.readObject());
+        this.start.set((Date)s.readObject());
+        this.end.set((Date)s.readObject());
+        this.isDone.set(s.readBoolean());
+    }
+
+    private void initializeProperty() {
+        title = new SimpleStringProperty("");
+        detail = new SimpleStringProperty("");
+
+        created = new SimpleObjectProperty<Date>(null);
+        start = new SimpleObjectProperty<Date>(null);
+        end = new SimpleObjectProperty<Date>(null);
+        isDone = new SimpleBooleanProperty(false);
     }
 }
