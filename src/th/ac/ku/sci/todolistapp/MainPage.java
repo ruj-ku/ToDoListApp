@@ -14,6 +14,7 @@ import th.ac.ku.sci.todolistapp.model.TodoItem;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -103,13 +104,12 @@ public class MainPage {
                     this.current = newValue;
                     if(newValue != null) {
                         this.titleUpdateTextField.setText(newValue.getTitle());
-                        this.detailAddTextArea.setText(newValue.getDetail());
+                        this.detailUpdateTextArea.setText(newValue.getDetail());
                         if(newValue.getStart()!=null){
                             this.startUpdateCheckBox.setSelected(true);
                             this.startUpdateDatePicker.setValue(
-                                    newValue.getStart().toInstant()
-                                            .atZone(ZoneId.systemDefault())
-                                            .toLocalDate());
+                                    LocalDate.ofInstant(newValue.getStart().toInstant(),
+                                            ZoneId.systemDefault()));
                         }else {
                             this.startUpdateCheckBox.setSelected(false);
                             this.startUpdateDatePicker.setValue(null);
@@ -117,9 +117,8 @@ public class MainPage {
                         if(newValue.getEnd()!=null){
                             this.endUpdateCheckBox.setSelected(true);
                             this.endUpdateDatePicker.setValue(
-                                    newValue.getEnd().toInstant()
-                                            .atZone(ZoneId.systemDefault())
-                                            .toLocalDate());
+                                    LocalDate.ofInstant(newValue.getEnd().toInstant(),
+                                            ZoneId.systemDefault()));
                         }else {
                             this.endUpdateCheckBox.setSelected(false);
                             this.endUpdateDatePicker.setValue(null);
@@ -146,7 +145,25 @@ public class MainPage {
 
     @FXML
     public void updateButtonActionHandler(ActionEvent e){
-
+        this.current.setTitle(this.titleUpdateTextField.getText());
+        this.current.setDetail(this.detailUpdateTextArea.getText());
+        if(this.startUpdateCheckBox.isSelected() && this.startUpdateDatePicker.getValue() != null){
+            this.current.setStart(
+                    Date.from(this.startUpdateDatePicker.getValue()
+                            .atStartOfDay(ZoneId.systemDefault()).toInstant())
+            );
+        }else{
+            this.current.setStart(null);
+        }
+        if(this.endUpdateCheckBox.isSelected() && this.endUpdateDatePicker.getValue() != null){
+            this.current.setEnd(
+                    Date.from(this.endUpdateDatePicker.getValue()
+                            .atStartOfDay(ZoneId.systemDefault()).toInstant())
+            );
+        }else{
+            this.current.setEnd(null);
+        }
+        this.tableView.refresh();
     }
 
     @FXML

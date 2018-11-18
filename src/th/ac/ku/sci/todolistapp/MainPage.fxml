@@ -63,7 +63,7 @@
                                     </HBox>
                                  </children>
                               </FlowPane>
-                              <Button mnemonicParsing="false" text="Update" />
+                              <Button mnemonicParsing="false" onAction="#updateButtonActionHandler" text="Update" />
                            </children>
                         </VBox>
                      </children>
