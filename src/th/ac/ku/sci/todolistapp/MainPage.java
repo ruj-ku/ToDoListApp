@@ -137,9 +137,14 @@ public class MainPage {
         this.createRandomData();
     }
 
-
-
     @FXML
+    public void clearDoneButtonActionHandler(ActionEvent e){
+        ObservableList<TodoItem> list = this.dataModel.getObservableList();
+        list.removeIf(todoItem -> {return todoItem.getIsDone();});
+    }
+
+
+        @FXML
     public void addButtonActionHandler(ActionEvent e){
         TodoItem item = new TodoItem(
                 this.titleAddTextField.getText(),

@@ -29,7 +29,7 @@
             <TableColumn fx:id="endColumn" minWidth="150.0" prefWidth="150.0" text="End" />
         </columns>
       </TableView>
-      <Button mnemonicParsing="false" text="Clear Done" />
+      <Button mnemonicParsing="false" onAction="#clearDoneButtonActionHandler" text="Clear Done" />
       <Separator prefWidth="200.0" />
       <Accordion>
         <panes>
