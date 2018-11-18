@@ -19,7 +19,7 @@ class DataModelTest {
 
     @Test
     void saveAndLoad() {
-        DataModel dataModel = new DataModel();
+        DataModel dataModel = DataModel.getInstance();
 
         // Save null
         assertThrows(FileNotFoundException.class, () -> {dataModel.save(null);});
@@ -52,7 +52,7 @@ class DataModelTest {
 
         TodoItem[] todoItems = new TodoItem[5];
         for (int i = 0; i < 5; i++) {
-            todoItems[i] = createRandomTodoItem();
+            todoItems[i] = TodoItem.createRandomTodoItem();
             l.add(todoItems[i]);
         }
 
@@ -69,18 +69,5 @@ class DataModelTest {
             assertEquals(todoItems[i],t);
             i++;
         }
-    }
-
-    TodoItem createRandomTodoItem(){
-        Calendar c = Calendar.getInstance();
-        Random random = new Random();
-        c.set(2018,1+random.nextInt(11),1+random.nextInt(27));
-        Date d1 = c.getTime();
-        c.set(2018,1+random.nextInt(11),1+random.nextInt(27));
-        Date d2 = c.getTime();
-        c.set(2018,1+random.nextInt(11),1+random.nextInt(27));
-        Date d3 = c.getTime();
-        return new TodoItem("Title"+ random.nextInt(),
-                "Detail"+random.nextInt(), d1,d2,d3);
     }
 }

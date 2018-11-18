@@ -8,6 +8,8 @@ import java.io.*;
 
 public class DataModel {
 
+    private static DataModel dataModel;
+
     private ObservableList<TodoItem> observableList;
 
     /* We make this inner class private so that other programmer
@@ -69,7 +71,14 @@ public class DataModel {
         fileInputStream.close();
     }
 
-    public DataModel() {
+    private DataModel() {
+    }
+
+    public static DataModel getInstance(){
+        if(DataModel.dataModel == null){
+            DataModel.dataModel = new DataModel();
+        }
+        return dataModel;
     }
 
     /**

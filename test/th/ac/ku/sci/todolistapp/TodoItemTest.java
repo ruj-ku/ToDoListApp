@@ -58,23 +58,23 @@ class TodoItemTest {
         assertFalse(t1.equals(null));
         assertTrue(t1.equals(t2));
 
-        t1.title = "a";
+        t1.setTitle("a");
         assertFalse(t1.equals(t2));
-        t2.title = "a";
+        t2.setTitle("a");
         assertTrue(t1.equals(t2));
 
-        t1.detail = "da";
+        t1.setDetail("da");
         assertFalse(t1.equals(t2));
-        t1.title = "b";
+        t1.setTitle("b");
         assertFalse(t1.equals(t2));
-        t2.title = "b";
+        t2.setTitle("b");
         assertFalse(t1.equals(t2));
 
-        t2.detail = "da";
+        t2.setDetail("da");
         assertTrue(t1.equals(t2));
-        t1.title = "a";
+        t1.setTitle("a");
         assertFalse(t1.equals(t2));
-        t2.title = "a";
+        t2.setTitle("a");
         assertTrue(t1.equals(t2));
 
         // More to test for all combinations
