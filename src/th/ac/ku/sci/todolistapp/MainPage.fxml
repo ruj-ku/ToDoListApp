@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox prefHeight="574.0" prefWidth="632.0" spacing="10.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.todolistapp.MainPage">
    <children>
       <TableView fx:id="tableView" editable="true" maxHeight="1.7976931348623157E308">
@@ -31,33 +30,33 @@
       <FlowPane hgap="10.0">
          <children>
             <Label text="Title" />
-            <TextField prefWidth="400.0" />
+            <TextField fx:id="titleTextField" prefWidth="400.0" />
          </children>
       </FlowPane>
       <Label text="Detail" />
-      <TextArea minHeight="150.0" prefHeight="150.0" />
+      <TextArea fx:id="detailArea" minHeight="150.0" prefHeight="150.0" />
       <FlowPane hgap="10.0">
          <children>
             <HBox alignment="CENTER_LEFT" spacing="5.0">
                <children>
-                  <CheckBox mnemonicParsing="false" text="Start" />
-                  <DatePicker />
+                  <CheckBox fx:id="startCheckBox" mnemonicParsing="false" text="Start" />
+                  <DatePicker fx:id="startDatePicker" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5.0">
                <children>
-                  <CheckBox mnemonicParsing="false" text="End" />
-                  <DatePicker />
+                  <CheckBox fx:id="endCheckBox" mnemonicParsing="false" text="End" />
+                  <DatePicker fx:id="endDatePicker" />
                </children>
             </HBox>
          </children>
       </FlowPane>
-      <Button mnemonicParsing="false" text="Add" />
+      <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonActionHandler" text="Add" />
       <Separator prefWidth="200.0" />
       <ButtonBar>
         <buttons>
-          <Button mnemonicParsing="false" text="Load" />
-            <Button mnemonicParsing="false" text="Save" />
+          <Button mnemonicParsing="false" onAction="#loadButtonActionHandler" text="Load" />
+            <Button mnemonicParsing="false" onAction="#saveButtonActionHandler" text="Save" />
         </buttons>
       </ButtonBar>
    </children>
