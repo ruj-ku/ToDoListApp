@@ -19,7 +19,22 @@ public class DataModel {
 
         @Override
         public void onChanged(Change<? extends TodoItem> c) {
-
+            while (c.next()) {
+                if (c.wasPermutated()) {
+                    for (int i = c.getFrom(); i < c.getTo(); ++i) {
+                        //permutate
+                    }
+                } else if (c.wasUpdated()) {
+                    //update item
+                } else {
+                    for (TodoItem remitem : c.getRemoved()) {
+                        //System.out.println(remitem);
+                    }
+                    for (TodoItem additem : c.getAddedSubList()) {
+                        //System.out.println(additem);
+                    }
+                }
+            }
         }
     }
 

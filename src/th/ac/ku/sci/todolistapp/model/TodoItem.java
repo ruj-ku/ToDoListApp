@@ -21,6 +21,10 @@ public class TodoItem implements Serializable {
     private SimpleObjectProperty<Date> end ;
     private SimpleBooleanProperty isDone ;
 
+    public SimpleBooleanProperty isDoneProperty(){
+        return isDone;
+    }
+
     public TodoItem(){
         initializeProperty();
     }
@@ -91,7 +95,7 @@ public class TodoItem implements Serializable {
         }
     }
 
-    public boolean getIsDone(){
+    public Boolean getIsDone(){
         return isDone.get();
     }
 
