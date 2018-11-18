@@ -14,9 +14,12 @@ import th.ac.ku.sci.todolistapp.model.TodoItem;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class MainPage {
+
+    TodoItem current = null;
 
     File saveFile = new File("todo.sav");
 
@@ -41,22 +44,40 @@ public class MainPage {
     TableColumn endColumn;
 
     @FXML
-    TextField titleTextField;
+    TextField titleUpdateTextField;
 
     @FXML
-    TextArea detailArea;
+    TextArea detailUpdateTextArea;
 
     @FXML
-    CheckBox startCheckBox;
+    CheckBox startUpdateCheckBox;
 
     @FXML
-    CheckBox endCheckBox;
+    CheckBox endUpdateCheckBox;
 
     @FXML
-    DatePicker startDatePicker;
+    DatePicker startUpdateDatePicker;
 
     @FXML
-    DatePicker endDatePicker;
+    DatePicker endUpdateDatePicker;
+
+    @FXML
+    TextField titleAddTextField;
+
+    @FXML
+    TextArea detailAddTextArea;
+
+    @FXML
+    CheckBox startAddCheckBox;
+
+    @FXML
+    CheckBox endAddCheckBox;
+
+    @FXML
+    DatePicker startAddDatePicker;
+
+    @FXML
+    DatePicker endAddDatePicker;
 
     @FXML
     Button addButton;
@@ -79,8 +100,38 @@ public class MainPage {
 
         this.tableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
-                    System.out.println("Old"+oldValue);
-                    System.out.println("New"+newValue);
+                    this.current = newValue;
+                    if(newValue != null) {
+                        this.titleUpdateTextField.setText(newValue.getTitle());
+                        this.detailAddTextArea.setText(newValue.getDetail());
+                        if(newValue.getStart()!=null){
+                            this.startUpdateCheckBox.setSelected(true);
+                            this.startUpdateDatePicker.setValue(
+                                    newValue.getStart().toInstant()
+                                            .atZone(ZoneId.systemDefault())
+                                            .toLocalDate());
+                        }else {
+                            this.startUpdateCheckBox.setSelected(false);
+                            this.startUpdateDatePicker.setValue(null);
+                        }
+                        if(newValue.getEnd()!=null){
+                            this.endUpdateCheckBox.setSelected(true);
+                            this.endUpdateDatePicker.setValue(
+                                    newValue.getEnd().toInstant()
+                                            .atZone(ZoneId.systemDefault())
+                                            .toLocalDate());
+                        }else {
+                            this.endUpdateCheckBox.setSelected(false);
+                            this.endUpdateDatePicker.setValue(null);
+                        }
+                    }else{
+                        this.titleUpdateTextField.setText("");
+                        this.detailAddTextArea.setText("");
+                        this.startUpdateCheckBox.setSelected(false);
+                        this.startUpdateDatePicker.setValue(null);
+                        this.endUpdateCheckBox.setSelected(false);
+                        this.endUpdateDatePicker.setValue(null);
+                    }
                 });
 
         this.createRandomData();
@@ -90,6 +141,11 @@ public class MainPage {
 
     @FXML
     public void addButtonActionHandler(ActionEvent e){
+
+    }
+
+    @FXML
+    public void updateButtonActionHandler(ActionEvent e){
 
     }
 

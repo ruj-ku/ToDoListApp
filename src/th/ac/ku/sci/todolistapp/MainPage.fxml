@@ -42,23 +42,23 @@
                               <FlowPane hgap="10.0">
                                  <children>
                                     <Label text="Title" />
-                                    <TextField fx:id="titleTextField1" prefWidth="400.0" />
+                                    <TextField fx:id="titleUpdateTextField" prefWidth="400.0" />
                                  </children>
                               </FlowPane>
                               <Label text="Detail" />
-                              <TextArea fx:id="detailArea1" minHeight="150.0" prefHeight="150.0" />
+                              <TextArea fx:id="detailUpdateTextArea" minHeight="150.0" prefHeight="150.0" />
                               <FlowPane hgap="10.0">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" spacing="5.0">
                                        <children>
-                                          <CheckBox fx:id="startCheckBox1" mnemonicParsing="false" text="Start" />
-                                          <DatePicker fx:id="startDatePicker1" />
+                                          <CheckBox fx:id="startUpdateCheckBox" mnemonicParsing="false" text="Start" />
+                                          <DatePicker fx:id="startUpdateDatePicker" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" spacing="5.0">
                                        <children>
-                                          <CheckBox fx:id="endCheckBox1" mnemonicParsing="false" text="End" />
-                                          <DatePicker fx:id="endDatePicker1" />
+                                          <CheckBox fx:id="endUpdateCheckBox" mnemonicParsing="false" text="End" />
+                                          <DatePicker fx:id="endUpdateDatePicker" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -79,23 +79,23 @@
                               <FlowPane hgap="10.0">
                                  <children>
                                     <Label text="Title" />
-                                    <TextField fx:id="titleTextField" prefWidth="400.0" />
+                                    <TextField fx:id="titleAddTextField" prefWidth="400.0" />
                                  </children>
                               </FlowPane>
                               <Label text="Detail" />
-                              <TextArea fx:id="detailArea" minHeight="150.0" prefHeight="150.0" />
+                              <TextArea fx:id="detailAddTextArea" minHeight="150.0" prefHeight="150.0" />
                               <FlowPane hgap="10.0">
                                  <children>
                                     <HBox alignment="CENTER_LEFT" spacing="5.0">
                                        <children>
-                                          <CheckBox fx:id="startCheckBox" mnemonicParsing="false" text="Start" />
-                                          <DatePicker fx:id="startDatePicker" />
+                                          <CheckBox fx:id="startAddCheckBox" mnemonicParsing="false" text="Start" />
+                                          <DatePicker fx:id="startAddDatePicker" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" spacing="5.0">
                                        <children>
-                                          <CheckBox fx:id="endCheckBox" mnemonicParsing="false" text="End" />
-                                          <DatePicker fx:id="endDatePicker" />
+                                          <CheckBox fx:id="endAddCheckBox" mnemonicParsing="false" text="End" />
+                                          <DatePicker fx:id="endAddDatePicker" />
                                        </children>
                                     </HBox>
                                  </children>
