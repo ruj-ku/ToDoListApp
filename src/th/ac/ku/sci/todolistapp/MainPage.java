@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import th.ac.ku.sci.todolistapp.model.DataModel;
 import th.ac.ku.sci.todolistapp.model.TodoItem;
@@ -35,6 +36,7 @@ public class MainPage {
     @FXML
     void initialize(){
         this.isDoneColumn.setCellValueFactory(new PropertyValueFactory<TodoItem, Boolean>("isDone"));
+        this.isDoneColumn.setCellFactory(CheckBoxTableCell.forTableColumn(isDoneColumn));
         this.titleColumn.setCellValueFactory(new PropertyValueFactory<TodoItem,String>("title"));
         this.createdColumn.setCellValueFactory(new PropertyValueFactory<TodoItem, Date>("created"));
         this.startColumn.setCellValueFactory(new PropertyValueFactory<TodoItem, Date>("start"));
@@ -49,6 +51,7 @@ public class MainPage {
         for (int i = 0; i < 10; i++) {
             l.add(TodoItem.createRandomTodoItem());
         }
+
 
     }
 }
