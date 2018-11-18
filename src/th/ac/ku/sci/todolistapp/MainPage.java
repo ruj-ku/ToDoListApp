@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainPage {
@@ -140,7 +141,24 @@ public class MainPage {
 
     @FXML
     public void addButtonActionHandler(ActionEvent e){
-
+        TodoItem item = new TodoItem(
+                this.titleAddTextField.getText(),
+                this.detailAddTextArea.getText(),
+                Calendar.getInstance().getTime(),
+                null,null);
+        if(this.startAddCheckBox.isSelected() && this.startAddDatePicker.getValue() != null){
+            item.setStart(
+                    Date.from(this.startAddDatePicker.getValue()
+                            .atStartOfDay(ZoneId.systemDefault()).toInstant())
+            );
+        }
+        if(this.endAddCheckBox.isSelected() && this.endAddDatePicker.getValue() != null){
+            item.setEnd(
+                    Date.from(this.endAddDatePicker.getValue()
+                            .atStartOfDay(ZoneId.systemDefault()).toInstant())
+            );
+        }
+        this.dataModel.getObservableList().add(item);
     }
 
     @FXML
